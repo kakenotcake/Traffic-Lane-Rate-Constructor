@@ -1,0 +1,199 @@
+public class Argentina
+{
+	private double[] exportRate = new double[7];
+	private double[] importRate = new double[7];
+	private int[] breakPointExport = new int [6];
+	private int[] breakPointImport = new int[6];
+	private String type = "Traffic-Lane";
+	int breakPoint;
+	double total;
+
+	public void setExportRate()
+	{
+		exportRate[0] = 302.24; //3000 min to 4999
+		exportRate[1] = 210.50; //5000 to 6999
+		exportRate[2] = 176.96; //7000 to 8999
+		exportRate[3] = 146.91; //9000 to 10,999
+		exportRate[4] = 128.70; //11,000 to 12,999
+		exportRate[5] = 116.21; //13,000 to 14,999
+		exportRate[6] = 116.08; //15,000+
+
+	}
+	public void setImportRate()
+	{
+		importRate[0] = 348.20; //3000 min to 4999
+		importRate[1] = 234.60; //5000 to 6999
+		importRate[2] = 200.64; //7000 to 8999
+		importRate[3] = 167.17; //9000 to 10,999
+		importRate[4] = 146.95; //11,000 to 12,999
+		importRate[5] = 134.73; //13,000 to 14,999
+		importRate[6] = 125.50; //15,000+
+
+	}
+	public void setBreakPointExport()
+	{
+		breakPointExport[0] = 3482; //3000 to 5000
+		breakPointExport[1] = 5885; // 5000 to 7000
+		breakPointExport[2] = 7472; //7000 to 9000
+		breakPointExport[3] = 9637; //9000 to 11000
+		breakPointExport[4] = 11738; //11000 to 13000
+		breakPointExport[5] = 14983; //13000 to 15000
+
+	}
+	public void setBreakPointImport()
+	{
+		breakPointImport[0] = 3369; //3000 to 5000
+		breakPointImport[1] = 5987; //5000 to 7000
+		breakPointImport[2] = 7499; //7000 to 9000
+		breakPointImport[3] = 9669; //9000 to 11000
+		breakPointImport[4] = 11919; //11000 to 13000
+		breakPointImport[5] = 13972; //13000 to 15000
+	}
+	public double getCalculation(int direction, int weight)
+	{
+
+		System.out.println("I am in the getCalculation method");
+		System.out.println(weight);
+		if (direction == 0)
+		{
+			setExportRate();
+			setBreakPointExport();
+			calculateExport(weight);
+		}
+		else
+		{
+			setImportRate();
+			setBreakPointImport();
+			calculateImport(weight);
+		}
+		return total;
+		/*else
+		{
+			calculateImport(weight);
+		}*/
+	}
+	public double calculateExport(int weight)
+	{
+		System.out.println("I am in the calculateExport method");
+		System.out.println(weight);
+		System.out.println(exportRate[1]);
+		if (weight <= 3000)
+		{
+			total = 3000 * exportRate[0]; //3000 x 302.24
+		}
+		else if (weight > 3000 && weight <= breakPointExport[0])
+		{
+			total = weight * exportRate[0]; //weight x 302.24
+		}
+		else if (weight > breakPointExport[0] && weight < 5000)
+		{
+			total = 5000 * exportRate[1]; //5000 x 210.50
+		}
+		else if (weight >= 5000 && weight <= breakPointExport[1])
+		{
+			total = weight * exportRate[1]; //weight x 210.50
+		}
+		else if (weight > breakPointExport[1] && weight < 7000)
+		{
+			total = 7000 * exportRate[2]; //7000 x 176.96
+		}
+		else if (weight >= 7000 && weight <= breakPointExport[2])
+		{
+			total = weight * exportRate[2]; //weight x 176.96
+		}
+		else if (weight > breakPointExport[2] && weight < 9000) //9000 x 146.91
+		{
+			total = 9000 * exportRate[3];
+		}
+		else if (weight >= 9000 && weight <= breakPointExport[3]) //weight x 146.91
+		{
+			total = weight * exportRate[3];
+		}
+		else if (weight > breakPointExport[3] && weight > 11000) //11000 x 128.70
+		{
+			total = 11000 * exportRate[4];
+		}
+		else if (weight >= 11000 && weight <=breakPointExport[4]) //weight x 128.70
+		{
+			total = weight * exportRate[4];
+		}
+		else if (weight > breakPointExport[4] && weight < 13000) //13000 x 116.21
+		{
+			total = 13000 * exportRate[5];
+		}
+		else if (weight >= 13000 && weight <= breakPointExport[5])
+		{
+			total = weight * exportRate[5];
+		}
+		else if (weight > breakPointExport[5] && weight < 15000)
+		{
+			total = 15000 * exportRate[6];
+		}
+		else if (weight >= 15000)
+		{
+			total = weight * exportRate[6];
+		}
+		return total;
+	}
+	public double calculateImport(int weight)
+	{
+		if (weight <= 3000)
+		{
+			total = 3000 * importRate[0];
+		}
+		else if (weight > 3000 && weight <= breakPointImport[0])
+		{
+			total = weight * importRate[0];
+		}
+		else if (weight > breakPointImport[0] && weight < 5000)
+		{
+			total = 5000 * importRate[1];
+		}
+		else if (weight >= 5000 && weight <= breakPointImport[1])
+		{
+			total = weight * importRate[1];
+		}
+		else if (weight > breakPointImport[1] && weight < 7000)
+		{
+			total = 7000 * importRate[2];
+		}
+		else if (weight >= 7000 && weight <= breakPointImport[2])
+		{
+			total = weight * importRate[2];
+		}
+		else if (weight > breakPointImport[2] && weight < 9000) //9000 x 146.91
+		{
+			total = 9000 * importRate[3];
+		}
+		else if (weight >= 9000 && weight <= breakPointImport[3]) //weight x 146.91
+		{
+			total = weight * importRate[3];
+		}
+		else if (weight > breakPointImport[3] && weight > 11000) //11000 x 128.70
+		{
+			total = 11000 * importRate[4];
+		}
+		else if (weight >= 11000 && weight <=breakPointImport[4]) //weight x 128.70
+		{
+			total = weight * importRate[4];
+		}
+		else if (weight > breakPointImport[4] && weight < 13000) //13000 x 116.21
+		{
+			total = 13000 * importRate[5];
+		}
+		else if (weight >= 13000 && weight <= breakPointImport[5])
+		{
+			total = weight * importRate[5];
+		}
+		else if (weight > breakPointImport[5] && weight < 15000)
+		{
+			total = 15000 * importRate[6];
+		}
+		else if (weight >= 15000)
+		{
+			total = weight * importRate[6];
+		}
+		return total;
+	}
+
+}
